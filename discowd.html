@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Discord Webhook Sender</title>
+<title>goofy ahh discord sender</title>
 
 <style>
 * {
@@ -120,37 +119,37 @@ button:hover {
 
     <div id="sendPage">
 
-        <h1>Discord Sender</h1>
+        <h1>goofy ahh discord sender</h1>
 
-        <label>API / Webhook</label>
+        <label>which webhook are we cooking?</label>
 
         <select id="webhookSelect"></select>
 
-        <label>Message</label>
+        <label>type your goofy ahh message</label>
 
         <textarea
             id="message"
-            placeholder="What do you want to send?"
+            placeholder="say something absolutely unnecessary..."
         ></textarea>
 
         <button onclick="sendMessage()">
-            Send
+            YEET IT TO DISCORD
         </button>
 
         <button
             class="secondary"
             onclick="clearMessage()">
-            Clear
+            erase my evidence
         </button>
 
         <button
             class="secondary"
             onclick="showSettings()">
-            ⚙ Configure APIs
+            configure the forbidden webhook technology
         </button>
 
         <div id="status" class="status">
-            Ready.
+            standing by for nonsense...
         </div>
 
     </div>
@@ -160,26 +159,26 @@ button:hover {
 
     <div id="settingsPage" class="hidden">
 
-        <h1>Configure APIs</h1>
+        <h1>webhook wizardry department</h1>
 
         <div class="small">
-            APIs are saved locally in this browser.
+            webhook stuff is stored locally because apparently that's easier.
         </div>
 
         <div id="webhookList"></div>
 
         <button onclick="addWebhook()">
-            + Add API
+            + summon another webhook
         </button>
 
         <button onclick="saveSettings()">
-            Save & Refresh
+            save this nonsense
         </button>
 
         <button
             class="secondary"
             onclick="showSendPage()">
-            ← Back
+            ← escape the settings dimension
         </button>
 
     </div>
@@ -190,7 +189,7 @@ button:hover {
 <script>
 
 /* =========================
-   LOAD SAVED WEBHOOKS
+   LOAD THE SILLY WEBHOOKS
 ========================= */
 
 let webhooks = JSON.parse(
@@ -199,7 +198,7 @@ let webhooks = JSON.parse(
 
 
 /* =========================
-   SEND PAGE
+   WEBHOOK SELECTOR OF DOOM
 ========================= */
 
 function refreshWebhookSelect() {
@@ -215,7 +214,7 @@ function refreshWebhookSelect() {
             document.createElement("option");
 
         option.textContent =
-            "No APIs configured";
+            "no webhooks detected. absolutely tragic.";
 
         option.value = "";
 
@@ -233,7 +232,7 @@ function refreshWebhookSelect() {
 
         option.textContent =
             webhook.name ||
-            "API " + (index + 1);
+            "mysterious webhook " + (index + 1);
 
         select.appendChild(option);
     });
@@ -241,7 +240,7 @@ function refreshWebhookSelect() {
 
 
 /* =========================
-   SEND MESSAGE
+   YEET MESSAGE
 ========================= */
 
 async function sendMessage() {
@@ -259,7 +258,7 @@ async function sendMessage() {
     if (!message.trim()) {
 
         status.textContent =
-            "Enter a message first.";
+            "bro typed absolutely nothing.";
 
         return;
     }
@@ -268,7 +267,7 @@ async function sendMessage() {
     if (webhooks.length === 0) {
 
         status.textContent =
-            "Configure an API first.";
+            "there are no webhooks. we are cooked.";
 
         return;
     }
@@ -281,14 +280,14 @@ async function sendMessage() {
     if (!webhook || !webhook.url) {
 
         status.textContent =
-            "Invalid API configuration.";
+            "this webhook is built different. and not in a good way.";
 
         return;
     }
 
 
     status.textContent =
-        "Sending...";
+        "launching the message into the discord dimension...";
 
 
     try {
@@ -313,13 +312,8 @@ async function sendMessage() {
 
         if (response.ok) {
 
-            /*
-                IMPORTANT:
-                The message is NOT cleared.
-            */
-
             status.textContent =
-                "✓ Message sent!";
+                "message successfully yeeted into discord.";
 
         } else {
 
@@ -327,7 +321,7 @@ async function sendMessage() {
                 await response.text();
 
             status.textContent =
-                "Discord returned HTTP " +
+                "discord said no. HTTP " +
                 response.status +
                 ": " +
                 text;
@@ -336,13 +330,14 @@ async function sendMessage() {
     } catch (error) {
 
         status.textContent =
-            "Error: " + error.message;
+            "the internet exploded: " +
+            error.message;
     }
 }
 
 
 /* =========================
-   CLEAR MESSAGE
+   DELETE THE EVIDENCE
 ========================= */
 
 function clearMessage() {
@@ -353,12 +348,13 @@ function clearMessage() {
 
     document.getElementById(
         "status"
-    ).textContent = "Ready.";
+    ).textContent =
+        "evidence successfully erased. probably.";
 }
 
 
 /* =========================
-   SETTINGS
+   ENTER THE WEBHOOK DIMENSION
 ========================= */
 
 function showSettings() {
@@ -390,7 +386,7 @@ function showSendPage() {
 
 
 /* =========================
-   RENDER API SETTINGS
+   WEBHOOK WIZARDRY
 ========================= */
 
 function renderSettings() {
@@ -410,17 +406,17 @@ function renderSettings() {
 
 
         div.innerHTML = `
-            <label>API Name</label>
+            <label>what do we call this silly thing?</label>
 
             <input
                 type="text"
                 class="apiName"
                 data-index="${index}"
                 value="${escapeHTML(webhook.name || "")}"
-                placeholder="Example: Main Discord"
+                placeholder="main server, goofy server, etc."
             >
 
-            <label>Webhook URL</label>
+            <label>forbidden webhook url</label>
 
             <input
                 type="text"
@@ -433,7 +429,7 @@ function renderSettings() {
             <button
                 class="danger"
                 onclick="removeWebhook(${index})">
-                Remove
+                DELETE THIS CREATURE
             </button>
         `;
 
@@ -443,13 +439,13 @@ function renderSettings() {
 
 
 /* =========================
-   ADD API
+   SUMMON WEBHOOK
 ========================= */
 
 function addWebhook() {
 
     webhooks.push({
-        name: "New API",
+        name: "new suspicious webhook",
         url: ""
     });
 
@@ -458,7 +454,7 @@ function addWebhook() {
 
 
 /* =========================
-   REMOVE API
+   BANISH WEBHOOK
 ========================= */
 
 function removeWebhook(index) {
@@ -470,7 +466,7 @@ function removeWebhook(index) {
 
 
 /* =========================
-   SAVE SETTINGS
+   SAVE THE NONSENSE
 ========================= */
 
 function saveSettings() {
@@ -499,7 +495,7 @@ function saveSettings() {
             newWebhooks.push({
                 name:
                     name ||
-                    "API " + (i + 1),
+                    "mysterious webhook " + (i + 1),
 
                 url: url
             });
@@ -517,16 +513,13 @@ function saveSettings() {
     );
 
 
-    /*
-        Reload the page after saving.
-    */
-
     location.reload();
 }
 
 
 /* =========================
-   HTML ESCAPING
+   HTML ESCAPING BECAUSE SECURITY
+   IS ALSO KINDA IMPORTANT
 ========================= */
 
 function escapeHTML(text) {
@@ -541,7 +534,7 @@ function escapeHTML(text) {
 
 
 /* =========================
-   START
+   WAKE UP THE MACHINE
 ========================= */
 
 refreshWebhookSelect();
@@ -550,4 +543,3 @@ refreshWebhookSelect();
 
 </body>
 </html>
-```
